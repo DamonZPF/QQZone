@@ -19,7 +19,10 @@
 
     if (self = [super initWithFrame:frame]) {
         // 创建按钮
-        [self setupButton:@"tabbar_photo" title:@"a"];
+        CustomButton * firstButton =    [self setupButton:@"tabbar_photo" title:@"a"];
+        firstButton.enabled = NO;
+        self.selectedButton = firstButton;
+        
         [self setupButton:@"tabbar_mood" title:@"adfadf"];
         [self setupButton:@"tabbar_blog" title:@"a"];
         // 创建按钮
@@ -32,13 +35,14 @@
     return self;
 }
 
--(void)setupButton:(NSString*)icon title:(NSString*)title{
+-(CustomButton*)setupButton:(NSString*)icon title:(NSString*)title{
     
     CustomButton * button = [[CustomButton alloc] init];
     [button setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
      [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchDown];
     [self addSubview:button];
+    return button;
 }
 
 -(void)buttonClick:(CustomButton*)btn{
